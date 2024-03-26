@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StorePostRequest extends FormRequest
 {
@@ -20,13 +21,18 @@ class StorePostRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
-        return [
-            'nome_progetto' => ['required', 'unique:projects', 'max:150'],
-            'descrizione_progetto' => ['required'],
-            'linguaggi' => ['required', 'max:1024'],
-            'immagine' => ['required', 'max:1024'],
+{
+    // Ottieni l'ID corrente dell'elemento (assumendo che sia passato tramite la richiesta)
 
-        ];
-    }
+    return [
+        'nome_progetto' => [
+            'required',
+            Rule::unique('projects')->ignore($this->project), // Ignora l'elemento corrente durante l'aggiornamento
+            'max:150'
+        ],
+        'descrizione_progetto' => ['required'],
+        'linguaggi' => ['required', 'max:1024'],
+        'immagine' => ['required', 'max:1024'],
+    ];
+}
 }
