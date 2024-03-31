@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -36,6 +37,11 @@ class ProjectController extends Controller
         $slug = Project::generateSlug($request->nome_progetto);
 
         $validatedData['slug'] = $slug;
+        if($request->hasFile('immagine')){
+            $path = Storage::disk('public')->put('projects_images', $request->immagine);
+            $validatedData['immagine'] = $path;
+
+        }
 
         $new_project = Project::create($validatedData);
 
@@ -47,7 +53,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('pages.dashboard.projects.show', compact('project'));
     }
 
     /**
@@ -69,7 +75,18 @@ class ProjectController extends Controller
         $slug = Project::generateSlug($validatedData['nome_progetto']);
     
         $validatedData['slug'] = $slug;
-    
+
+        if($request->hasFile('immagine')){
+            if( $project->immagine){
+                Storage::delete($project->immagine);
+            }
+                $path = Storage::disk('public')->put('immagine',$request->immagine);
+
+                $validatedData['immagine'] = $path;
+            
+
+        }
+
         $project->update($validatedData);
     
         return redirect()->route('dashboard.projects.index');
@@ -81,6 +98,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->immagine){
+            Storage::delete($project->immagine);
+        }
         $project->delete();
         return redirect()->route('dashboard.projects.index');
     }

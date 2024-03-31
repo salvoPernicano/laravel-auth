@@ -24,7 +24,7 @@ class ProjectSeeder extends Seeder
             $project->slug = Str::slug($project->nome_progetto, '-');
             $project->descrizione_progetto = $faker->text(300);
             $project->linguaggi = implode(', ', $faker->randomElements(['PHP', 'JavaScript', 'Python', 'Java', 'C#'], rand(3, 4)));
-            $project->immagine = $faker->imageUrl(640, 480, 'technics', true);
+           
 
             $project->save();
         }

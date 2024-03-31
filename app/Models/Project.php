@@ -15,6 +15,7 @@ class Project extends Model
         'descrizione_progetto',
         'linguaggi',
         'immagine'
+       
     ];
 
     public static function generateSlug($nome_progetto){

@@ -32,7 +32,6 @@ class StorePostRequest extends FormRequest
         ],
         'descrizione_progetto' => ['required'],
         'linguaggi' => ['required', 'max:1024'],
-        'immagine' => ['required', 'max:1024'],
     ];
 }
 }

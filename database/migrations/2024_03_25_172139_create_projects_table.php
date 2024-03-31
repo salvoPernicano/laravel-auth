@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug');
             $table->text('descrizione_progetto');
             $table->string('linguaggi',1024);
-            $table->string('immagine',1024);
+            $table->string('immagine',1024)->nullable();
             $table->timestamps();
         });
     }

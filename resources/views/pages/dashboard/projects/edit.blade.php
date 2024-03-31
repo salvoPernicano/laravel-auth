@@ -5,7 +5,7 @@
 @section('content')
 <main>
     <h1 class="pageHeader">Edit product</h1>
-    <form action="{{ route('dashboard.projects.update', $project ->id) }}" method="POST">
+    <form action="{{ route('dashboard.projects.update', $project ->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div>
@@ -36,9 +36,13 @@
             @enderror
         </div>
         <div>
+            @if($project->immagine){
+                <img src="{{ asset('/storage/'.$project->immagine) }}" alt="">
+            }
+            @endif
             <label for="immagine" class="form-label">url immagine</label>
-            <input type="text" class="form-control @error('immagine') is-invalid @enderror" name="immagine"
-                id="immagine" value="{{ old('immagine')  ?? $project->immagine }}">
+            <input type="file" class="form-control @error('immagine') is-invalid @enderror" name="immagine"
+                id="immagine">
             @error('immagine')
                 <div class="invalid-feedback">
                     {{ $message }} </div>

@@ -13,6 +13,7 @@
                 <th scope="col">slug</th>
                 <th scope="col">descrizione</th>
                 <th scope="col">linguaggi</th>
+                <th scope="col">immagini</th>
                 <th scope="col">Azioni</th>
               </tr>
             </thead>
@@ -20,10 +21,12 @@
                 @foreach($projects as $item)
               <tr>
                 <th scope="row">{{ $item->id }}</th>
-                <td>{{ $item->nome_progetto }}</td>
+      
+                <td><a  href="{{ route('dashboard.projects.show', $item->id) }}">{{ $item->nome_progetto }}</a></td>
                 <td>{{ $item->slug }}</td>
                 <td>{{ $item->descrizione_progetto }}</td>
                 <td>{{ $item->linguaggi }}</td>
+                <td>{{ $item->immagine }}</td>
                 <td>
                     <a class="btn btn-warning" href="{{ route('dashboard.projects.edit', $item->id) }}">Modifica progetto</a>
                     <form action="{{ route('dashboard.projects.destroy', $item->id) }}" method="POST">

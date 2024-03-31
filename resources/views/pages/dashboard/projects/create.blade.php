@@ -3,7 +3,7 @@
 @section('content')
     <main class="container">
         <h1>crea nuovo progetto</h1>
-        <form action="{{ route('dashboard.projects.store') }}" method="POST">
+        <form action="{{ route('dashboard.projects.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div>
                 <label for="nome_progetto" class="form-label">Nome progetto</label>
@@ -34,8 +34,8 @@
             </div>
             <div>
                 <label for="immagine" class="form-label">url immagine</label>
-                <input type="text" class="form-control @error('immagine') is-invalid @enderror" name="immagine"
-                    id="immagine" value="{{ old('immagine') }}">
+                <input type="file" class="form-control @error('immagine') is-invalid @enderror" name="immagine"
+                    id="immagine">
                 @error('immagine')
                     <div class="invalid-feedback">
                         {{ $message }} </div>
