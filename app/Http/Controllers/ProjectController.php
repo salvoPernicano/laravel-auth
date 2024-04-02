@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,8 +24,9 @@ class ProjectController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('pages.dashboard.projects.create');
+    {   
+        $types = Type::all();
+        return view('pages.dashboard.projects.create', compact('types'));
     }
 
     /**
@@ -60,8 +62,10 @@ class ProjectController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Project $project)
-    {
-        return view('pages.dashboard.projects.edit', compact('project'));
+    {   
+        $types = Type::all();
+  
+        return view('pages.dashboard.projects.edit', compact('project', 'types'));
     
     }
 
