@@ -15,6 +15,20 @@
                 @enderror
             </div>
             <div>
+                <label for="type_id" class="form-label">Categoria</label>
+                <select class="form-control @error('type_id') is-invalid @enderror" name="type_id"
+                    id="type_id" value="{{ old('nome_progetto') }}">
+                @foreach($types as $element)
+                    <option value="{{ $element->id }}" {{ $element->id == old('type_id') ? 'selected' : '' }}>{{ $element->name }}</option>
+                @endforeach
+                </select>
+                @error('type_id')
+                    <div class="invalid-feedback">
+                        {{ $message }} </div>
+                @enderror
+            </div>
+
+            <div>
                 <label for="descrizione_progetto" class="form-label">descrizione progetto</label>
                 <textarea type="text" class="form-control @error('descrizione_progetto') is-invalid @enderror"
                     name="descrizione_progetto" id="descrizione_progetto" rows="3"></textarea>

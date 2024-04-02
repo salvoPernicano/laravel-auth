@@ -31,7 +31,8 @@ class StorePostRequest extends FormRequest
             'max:150'
         ],
         'descrizione_progetto' => ['required'],
-        'linguaggi' => ['required', 'max:1024'],
+        'linguaggi' => ['required','max:1024'],
+        'type_id' => ['nullable','exists:types,id']
     ];
 }
 }
