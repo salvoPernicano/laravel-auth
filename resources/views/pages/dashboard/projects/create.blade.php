@@ -17,7 +17,7 @@
             <div>
                 <label for="type_id" class="form-label">Categoria</label>
                 <select class="form-control @error('type_id') is-invalid @enderror" name="type_id"
-                    id="type_id" value="{{ old('nome_progetto') }}">
+                    id="type_id">
                 @foreach($types as $element)
                     <option value="{{ $element->id }}" {{ $element->id == old('type_id') ? 'selected' : '' }}>{{ $element->name }}</option>
                 @endforeach
@@ -27,6 +27,20 @@
                         {{ $message }} </div>
                 @enderror
             </div>
+            <div>
+                <label for="technologies" class="form-label">Tecnologie</label>
+                <select multiple class="form-control @error('type_id') is-invalid @enderror" name="technologies[]"
+                    id="technologies">
+                @forelse($technologies as $element)
+                <option value="{{ $element->id }}">{{ $element->name }}</option>
+                    
+                @empty
+                    <option value="">Nessuna selezione</option>
+                @endforelse
+                </select>
+
+            </div>
+            
 
             <div>
                 <label for="descrizione_progetto" class="form-label">descrizione progetto</label>

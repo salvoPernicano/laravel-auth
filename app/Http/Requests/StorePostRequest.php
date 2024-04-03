@@ -32,7 +32,8 @@ class StorePostRequest extends FormRequest
         ],
         'descrizione_progetto' => ['required'],
         'linguaggi' => ['required','max:1024'],
-        'type_id' => ['nullable','exists:types,id']
+        'type_id' => ['nullable','exists:types,id'],
+        'technologies' => ['exists:technologies,id']
     ];
 }
 }
