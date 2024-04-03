@@ -40,7 +40,7 @@ class ProjectController extends Controller
 
         $validatedData['slug'] = $slug;
         if($request->hasFile('immagine')){
-            $path = Storage::disk('public')->put('projects_images', $request->immagine);
+            $path = Storage::disk('public')->put('project_images', $request->immagine);
             $validatedData['immagine'] = $path;
 
         }
@@ -84,7 +84,7 @@ class ProjectController extends Controller
             if( $project->immagine){
                 Storage::delete($project->immagine);
             }
-                $path = Storage::disk('public')->put('immagine',$request->immagine);
+                $path = Storage::disk('public')->put('project_images',$request->immagine);
 
                 $validatedData['immagine'] = $path;
             
