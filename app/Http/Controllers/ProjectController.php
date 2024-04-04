@@ -98,6 +98,10 @@ class ProjectController extends Controller
         }
 
         $project->update($validatedData);
+
+        if($request->has('technologies')){
+            $project->technologies()->sync($request->technologies);
+        }
     
         return redirect()->route('dashboard.projects.index');
     }
@@ -108,6 +112,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        $project->technologies()->sync([]);
+
         if ($project->immagine){
             Storage::delete($project->immagine);
         }
